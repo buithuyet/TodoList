@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.constraint.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1B5E20"
+    android:fitsSystemWindows="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do-It"
+        android:textColor="#ffffff"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="16dp"
+        android:textSize="64sp"
+        android:layout_marginLeft="20sp"
+        android:layout_marginTop="84dp"
+        android:id="@+id/splashTitle"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your personal tool to Success"
+        android:textColor="#ffffff"
+        app:layout_constraintLeft_toLeftOf="@id/splashTitle"
+        app:layout_constraintTop_toBottomOf="@id/splashTitle"
+        android:paddingLeft="18dp"
+        android:textSize="22sp"
+        android:id="@+id/splashSubTitle"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Powered by Nowocode"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="#ffffff"
+        android:padding="16dp"
+        android:id="@+id/splashText"
+        android:textSize="22sp"/>
+
+    </android.support.constraint.ConstraintLayout>
