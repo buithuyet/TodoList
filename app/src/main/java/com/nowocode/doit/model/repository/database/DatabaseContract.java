@@ -1,4 +1,4 @@
-package com.nowocode.doit.model.repository;
+package com.nowocode.doit.model.repository.database;
 
 import java.util.HashMap;
 
@@ -7,7 +7,7 @@ import java.util.HashMap;
  *         25.03.2017.
  */
 
-public class DatabaseContract {
+class DatabaseContract {
     private String[] tableList = {"task","statistic","calendar"};
 
     private String[] taskCols = {"name","description","priority","time"};
@@ -15,7 +15,7 @@ public class DatabaseContract {
     private String[] calendarCols = {"time"};
 
     private HashMap<String, String[]> tableColumnMap;
-    public DatabaseContract(){
+    protected DatabaseContract(){
         tableColumnMap = new HashMap<>();
         tableColumnMap.put(tableList[0],taskCols);
         tableColumnMap.put(tableList[1],statisticCols);

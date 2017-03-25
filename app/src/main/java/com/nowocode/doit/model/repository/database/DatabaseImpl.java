@@ -1,4 +1,4 @@
-package com.nowocode.doit.model.repository;
+package com.nowocode.doit.model.repository.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,13 +12,13 @@ import com.nowocode.doit.model.Task;
  *         25.03.2017.
  */
 
-public class Database implements IDatabase{
+public class DatabaseImpl implements Database {
     SQLiteDatabase database;
     private final String TAG = getClass().getName();
     private Context context;
     private DatabaseContract dbContract;
 
-    public Database(Context context){
+    protected DatabaseImpl(Context context){
         this.context = context;
         dbContract = new DatabaseContract();
         initDatabase();

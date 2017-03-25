@@ -10,6 +10,7 @@ import com.nowocode.doit.view.main.MainView;
 
 public interface MainPresenter extends BasePresenter<MainView> {
     void loadTasks();
-    void insrtTask(String name, String description, int priority);
+    void insertTask(String name, String description, int priority);
+    void insertAction(String what, String msg);
     void showCreateTaskDialog();
 }

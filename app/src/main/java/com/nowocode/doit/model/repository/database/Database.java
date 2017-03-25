@@ -1,4 +1,4 @@
-package com.nowocode.doit.model.repository;
+package com.nowocode.doit.model.repository.database;
 
 import com.nowocode.doit.model.Action;
 import com.nowocode.doit.model.Task;
@@ -8,9 +8,8 @@ import com.nowocode.doit.model.Task;
  *         25.03.2017.
  */
 
-public interface IDatabase {
-    void initDatabase();
-    void initTables();
+public interface Database extends DatabaseSchema {
+
     void insertTask(Task task);
     void insertStatistic(Action action);
     void removeTask(Task task);
