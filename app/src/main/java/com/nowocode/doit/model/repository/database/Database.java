@@ -9,7 +9,6 @@ import com.nowocode.doit.model.Task;
  */
 
 public interface Database extends DatabaseSchema {
-
     void insertTask(Task task);
     void insertStatistic(Action action);
     void removeTask(Task task);

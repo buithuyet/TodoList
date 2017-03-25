@@ -1,6 +1,6 @@
 package com.nowocode.doit.view.main;
 
-import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -11,7 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.nowocode.doit.R;
-import com.nowocode.doit.view.main.MainView;
+import com.nowocode.doit.presenter.PresenterBuilder;
+import com.nowocode.doit.presenter.MainPresenter;
 
 import java.util.ArrayList;
 
@@ -28,11 +29,17 @@ public class MainActivity extends AppCompatActivity implements MainView{
     private ViewPager mViewPager;
     private Toolbar toolbar;
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    private MainPresenter presenter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        drawUi();
+    }
+
+    @Override
+    public void drawUi() {
         setContentView(R.layout.main_activity);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("MobileJobr - Balance: $0");
@@ -46,11 +53,9 @@ public class MainActivity extends AppCompatActivity implements MainView{
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
-    }
 
-    @Override
-    public void drawUi() {
-
+        PresenterBuilder presenterBuilder = PresenterBuilder.createWith(this);
+        presenter = (MainPresenter) presenterBuilder.build();
     }
 
     @Override
@@ -61,6 +66,11 @@ public class MainActivity extends AppCompatActivity implements MainView{
     @Override
     public void onTaskClicked() {
 
+    }
+
+    @Override
+    public Context getContext() {
+        return getContext();
     }
 
 

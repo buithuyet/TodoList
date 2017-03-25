@@ -1,4 +1,4 @@
-package com.nowocode.doit.presenter.main;
+package com.nowocode.doit.presenter;
 
 import com.nowocode.doit.presenter.BasePresenter;
 import com.nowocode.doit.view.main.MainView;

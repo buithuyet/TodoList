@@ -1,6 +1,6 @@
 package com.nowocode.doit.view.main;
 
-import com.nowocode.doit.presenter.main.MainPresenter;
+import com.nowocode.doit.presenter.MainPresenter;
 import com.nowocode.doit.view.BaseView;
 
 /**
