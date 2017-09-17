@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements MainView{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         drawUi();
+        PresenterBuilder presenterBuilder = PresenterBuilder.createWith(this);
+        presenter = (MainPresenter) presenterBuilder.build();
     }
 
     @Override
@@ -53,9 +55,6 @@ public class MainActivity extends AppCompatActivity implements MainView{
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
-
-        PresenterBuilder presenterBuilder = PresenterBuilder.createWith(this);
-        presenter = (MainPresenter) presenterBuilder.build();
     }
 
     @Override
