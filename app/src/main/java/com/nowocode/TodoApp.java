@@ -9,6 +9,12 @@ import com.nowocode.doit.model.repository.database.AppDatabase;
 import com.nowocode.doit.model.repository.database.DatabaseProvider;
 import com.nowocode.doit.model.repository.database.user.User;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 /**
  * @author Nowocode
  *         17.09.2017.
@@ -27,13 +33,27 @@ public class TodoApp extends Application {
         preferenceProvider = new PreferenceProvider(this);
         db = dbProvider.getDatabase();
         //Default user erstellen und als aktiv persistieren wenn DB leer ist
-        if (db.userDao().getAll().isEmpty()) {
-            db.userDao().insert(createDefaultUser());
-            preferenceProvider.setCurrentUser("default");
-        }
-
-        initCurrentUser();
-        TaskFactory.initForUser(currentUser);
+        Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(ObservableEmitter<Boolean> e) throws Exception {
+                e.onNext(db.userDao().getAll().isEmpty());
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        if(aBoolean) {
+                            db.userDao().insert(createDefaultUser());
+                            preferenceProvider.setCurrentUser("default");
+                        }
+                        else
+                        {
+                            initCurrentUser();
+                            TaskFactory.initForUser(currentUser);
+                        }
+                    }
+                });
     }
 
     private User createDefaultUser() {

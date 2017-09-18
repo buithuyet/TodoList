@@ -18,7 +18,7 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
  *         17.09.2017.
  */
 
-@Entity(foreignKeys = @ForeignKey(entity = User.class, parentColumns = "id", childColumns = "user", onDelete = CASCADE))
+@Entity(foreignKeys = @ForeignKey(entity = User.class, parentColumns = "userId", childColumns = "userId", onDelete = CASCADE))
 public class Task {
     @Ignore
     public static final int DAILY = 0;
@@ -39,10 +39,11 @@ public class Task {
     private boolean isDone;
     @ColumnInfo(name = "created")
     private Date created;
-    @ColumnInfo(name = "user")
-    private String user;
+    @ColumnInfo(name = "userId")
+    private String userId;
     @ColumnInfo(name = "type")
     private int type;
+
 
     public Task() {
         id = Calendar.getInstance().getTimeInMillis();
@@ -96,12 +97,12 @@ public class Task {
         this.created = created;
     }
 
-    public String getUser() {
-        return user;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public int getType() {

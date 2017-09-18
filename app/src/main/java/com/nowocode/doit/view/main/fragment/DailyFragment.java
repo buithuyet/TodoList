@@ -1,5 +1,7 @@
 package com.nowocode.doit.view.main.fragment;
 
+import android.widget.Toast;
+
 /**
  * Created by Nowocode.
  * /|     |\
@@ -8,5 +10,13 @@ package com.nowocode.doit.view.main.fragment;
  * /______|     |___\
  */
 
-public class DailyFragment {
+public class DailyFragment extends AbstractTaskFragment {
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Toast.makeText(getContext(), "Daily", Toast.LENGTH_SHORT).show();
+    }
+
 }

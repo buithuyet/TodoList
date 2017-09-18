@@ -6,10 +6,13 @@ import com.nowocode.doit.model.Action;
 import com.nowocode.doit.model.factory.TaskFactory;
 import com.nowocode.doit.model.factory.UserFactory;
 import com.nowocode.doit.model.provider.TaskProvider;
+import com.nowocode.doit.model.provider.UserProvider;
 import com.nowocode.doit.model.repository.database.task.Task;
+import com.nowocode.doit.model.repository.database.user.User;
 import com.nowocode.doit.model.util.Timestamp;
 import com.nowocode.doit.view.main.MainView;
 
+import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -23,6 +26,7 @@ import io.reactivex.schedulers.Schedulers;
 class MainPresenterImpl implements MainPresenter {
     private MainView view;
     private TaskProvider taskProvider;
+    private UserProvider userProvider;
 
     MainPresenterImpl(MainView view) {
         this.view = view;
@@ -41,6 +45,21 @@ class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
+    public Observable<Task> getDailyTasks() {
+        return taskProvider.getAllTasksByType(Task.DAILY);
+    }
+
+    @Override
+    public Observable<Task> getWeeklyTasks() {
+        return taskProvider.getAllTasksByType(Task.WEEKLY);
+    }
+
+    @Override
+    public Observable<Task> getYearlyTasks() {
+        return taskProvider.getAllTasksByType(Task.YEARLY);
+    }
+
+    @Override
     public void insertTask(String name, String description, String category, int type) {
         Task t = TaskFactory.create(name, description, category, type);
         taskProvider.insert(t).subscribe(new Consumer<Boolean>() {
@@ -48,7 +67,7 @@ class MainPresenterImpl implements MainPresenter {
             public void accept(Boolean aBoolean) throws Exception {
                 if (aBoolean) {
                     //task successfully created
-                    taskProvider.incrementTaskTotalCount();
+
                 }
                 //task creation failed
             }
@@ -58,7 +77,6 @@ class MainPresenterImpl implements MainPresenter {
     @Override
     public void deleteTask(long id) {
         taskProvider.delete(id);
-        taskProvider.incrementTaskCanceledCount();
     }
 
     @Override
@@ -68,7 +86,15 @@ class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void createUser(String userId) {
-        UserFactory.create(userId);
+        User user = UserFactory.create(userId);
+        userProvider.createUser(user)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<User>() {
+                    @Override
+                    public void accept(User user) throws Exception {
+                        //update UI
+                    }
+                });
     }
 
     @Override

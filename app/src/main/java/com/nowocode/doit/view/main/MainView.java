@@ -8,7 +8,7 @@ import com.nowocode.doit.view.BaseView;
  *         25.03.2017.
  */
 
-public interface MainView extends BaseView<MainPresenter> {
+public interface MainView extends BaseView<MainPresenter>, TaskActivity{
     void drawUi();
     void onTaskRemove();
     void onTaskClicked();

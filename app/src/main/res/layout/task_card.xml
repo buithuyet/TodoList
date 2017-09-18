@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="@dimen/layout_padding">
 
         <!-- header -->
         <LinearLayout
@@ -21,17 +21,15 @@
             android:textStyle="bold"
             android:alpha="0.89"
             android:textSize="16sp"/>
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#000000"
-                android:alpha="0.14"
-                android:layout_marginLeft="32dp"/>
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="14.06.2016"
+                android:textSize="12sp"
                 android:textColor="@color/colorAccent"
+                android:layout_gravity="right"
+                android:gravity="end"
                 android:layout_marginLeft="16dp"/>
         </LinearLayout>
 
@@ -43,6 +41,12 @@
             android:layout_height="wrap_content"
             android:text="I need to book a plane ticket so I can get to Germany on time"/>
 
+        <View
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000"
+            android:alpha="0.19"/>
 
         <!-- checkbox -->
 
@@ -51,6 +55,13 @@
             android:layout_height="wrap_content"
 
             android:hint="Done"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/book_icon"
+            android:layout_gravity="end"
+            android:alpha="0.5"/>
     </LinearLayout>
 
     </android.support.v7.widget.CardView>

@@ -11,6 +11,9 @@ import io.reactivex.Observable;
  */
 
 public interface UserProvider {
+
+    Observable<User> createUser(User user);
+
     Observable<User> getUserById(String id);
 
     Observable<Boolean> removeUser(String id);

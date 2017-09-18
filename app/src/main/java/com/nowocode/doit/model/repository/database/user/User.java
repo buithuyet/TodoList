@@ -14,6 +14,7 @@ import java.util.Date;
 @Entity
 public class User {
     @PrimaryKey
+    @ColumnInfo(name = "userId")
     String id;
     @ColumnInfo(name = "totalTasks")
     int totalTasks;

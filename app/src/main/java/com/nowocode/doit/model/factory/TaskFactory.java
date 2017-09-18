@@ -23,7 +23,7 @@ public class TaskFactory {
         t.setTitle(title);
         t.setCategory(category);
         t.setCreated(getCurrentDate());
-        t.setUser(user.getId());
+        t.setUserId(user.getId());
         t.setDescription(description);
         t.setType(type);
         return t;

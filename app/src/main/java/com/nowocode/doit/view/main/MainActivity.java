@@ -2,6 +2,7 @@ package com.nowocode.doit.view.main;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,12 +10,23 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import com.nowocode.doit.R;
-import com.nowocode.doit.presenter.PresenterBuilder;
+import com.nowocode.doit.model.repository.database.task.Task;
 import com.nowocode.doit.presenter.MainPresenter;
+import com.nowocode.doit.presenter.PresenterBuilder;
+import com.nowocode.doit.view.main.fragment.DailyFragment;
+import com.nowocode.doit.view.main.fragment.WeeklyFragment;
+import com.nowocode.doit.view.main.fragment.YearlyFragment;
 
 import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by Nowocode.
@@ -24,13 +36,25 @@ import java.util.ArrayList;
  * /______|     |___\
  */
 
-public class MainActivity extends AppCompatActivity implements MainView{
-    private TabLayout tabLayout;
-    private ViewPager mViewPager;
-    private Toolbar toolbar;
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+public class MainActivity extends AppCompatActivity implements MainView {
+    @BindView(R.id.tabs)
+    TabLayout tabLayout;
+    @BindView(R.id.container)
+    ViewPager mViewPager;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.createTaskFab)
+    FloatingActionButton fab;
+    private TaskFragment dailyFragment;
+    private TaskFragment weeklyFragment;
+    private TaskFragment yearlyFragment;
+    SectionsPagerAdapter mSectionsPagerAdapter;
     private MainPresenter presenter;
 
+    @OnClick(R.id.createTaskFab)
+    void onNewTask() {
+        Toast.makeText(this, "Clicked Toast", Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +67,16 @@ public class MainActivity extends AppCompatActivity implements MainView{
     @Override
     public void drawUi() {
         setContentView(R.layout.main_activity);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("MobileJobr - Balance: $0");
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        mSectionsPagerAdapter.addFragment(new Fragment(), "Day");
-        mSectionsPagerAdapter.addFragment(new Fragment(), "Week");
-        mSectionsPagerAdapter.addFragment(new Fragment(), "Year");
+
+        // todo set TaskFragments
+
+        mSectionsPagerAdapter.addFragment(new DailyFragment(), "Day");
+        mSectionsPagerAdapter.addFragment(new WeeklyFragment(), "Week");
+        mSectionsPagerAdapter.addFragment(new YearlyFragment(), "Year");
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
     }
@@ -70,6 +94,39 @@ public class MainActivity extends AppCompatActivity implements MainView{
     @Override
     public Context getContext() {
         return getContext();
+    }
+
+    @Override
+    public void getDailyTasks() {
+        presenter.getDailyTasks().subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Task>() {
+                    @Override
+                    public void accept(Task task) throws Exception {
+                        dailyFragment.addTaskToDisplay(task);
+                    }
+                });
+    }
+
+    @Override
+    public void getWeeklyTasks() {
+        presenter.getWeeklyTasks().subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Task>() {
+                    @Override
+                    public void accept(Task task) throws Exception {
+                        weeklyFragment.addTaskToDisplay(task);
+                    }
+                });
+    }
+
+    @Override
+    public void getYearlyTasks() {
+        presenter.getYearlyTasks().subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Task>() {
+                    @Override
+                    public void accept(Task task) throws Exception {
+                        yearlyFragment.addTaskToDisplay(task);
+                    }
+                });
     }
 
 

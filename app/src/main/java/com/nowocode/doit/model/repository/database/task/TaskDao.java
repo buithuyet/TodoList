@@ -32,10 +32,10 @@ public interface TaskDao {
     @Query("SELECT * from Task where category=:category ORDER BY created")
     List<Task> getAllFromCategoryOrderedByTime(String category);
 
-    @Query("Select * from Task where isDone=true")
+    @Query("Select * from Task where isDone=1")
     List<Task> getAllDone();
 
-    @Query("Select * from Task where isDone=false")
+    @Query("Select * from Task where isDone=0")
     List<Task> getAllNotDone();
 
     @Query("Select * from Task where type=:type")
