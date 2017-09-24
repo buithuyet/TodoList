@@ -25,7 +25,9 @@ public class Task {
     @Ignore
     public static final int WEEKLY = 1;
     @Ignore
-    public static final int YEARLY = 2;
+    public static final int MONTHLY = 2;
+    @Ignore
+    public static final int YEARLY = 3;
 
     @PrimaryKey
     private long id;

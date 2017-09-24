@@ -16,7 +16,6 @@ public class DailyFragment extends AbstractTaskFragment {
     @Override
     public void onResume() {
         super.onResume();
-        Toast.makeText(getContext(), "Daily", Toast.LENGTH_SHORT).show();
     }
 
 }

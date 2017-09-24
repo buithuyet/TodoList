@@ -15,8 +15,6 @@ public class YearlyFragment extends AbstractTaskFragment {
     @Override
     public void onResume() {
         super.onResume();
-        Toast.makeText(getContext(), "Yearly", Toast.LENGTH_SHORT).show();
-
     }
 
 }

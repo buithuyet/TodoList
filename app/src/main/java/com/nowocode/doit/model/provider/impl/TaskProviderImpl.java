@@ -1,8 +1,8 @@
 package com.nowocode.doit.model.provider.impl;
 
 import com.nowocode.doit.model.ContextProvider;
-import com.nowocode.doit.model.provider.DatabaseProvider;
 import com.nowocode.doit.model.provider.TaskProvider;
+import com.nowocode.doit.model.repository.database.DatabaseProvider;
 import com.nowocode.doit.model.repository.database.task.Task;
 import com.nowocode.doit.model.repository.database.task.TaskDao;
 
@@ -21,7 +21,7 @@ public class TaskProviderImpl implements TaskProvider {
 
     public TaskProviderImpl(ContextProvider provider) {
         this.contextProvider = provider;
-        dao = DatabaseProvider.getDatabase().taskDao();
+        dao = DatabaseProvider.getInstance().getDatabase().taskDao();
     }
 
     @Override

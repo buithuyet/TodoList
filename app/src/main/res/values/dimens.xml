@@ -23,4 +23,5 @@
     <dimen name="ic_album_overflow_margin_top">10dp</dimen>
     <dimen name="layout_padding">16dp</dimen>
     <dimen name="cat_icon_height">80dp</dimen>
+    <dimen name="task_type_card_height">80dp</dimen>
 </resources>

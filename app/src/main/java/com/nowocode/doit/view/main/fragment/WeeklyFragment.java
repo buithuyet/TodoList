@@ -14,7 +14,6 @@ public class WeeklyFragment extends AbstractTaskFragment {
     @Override
     public void onResume() {
         super.onResume();
-        Toast.makeText(getContext(), "Weekly", Toast.LENGTH_SHORT).show();
 
     }
 

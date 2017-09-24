@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.nowocode.doit.R;
 import com.nowocode.doit.model.Constants;
 import com.nowocode.doit.model.util.FontSetter;
-import com.nowocode.doit.view.main.MainActivity;
+import com.nowocode.doit.view.main.MainViewImpl;
 
 /**
  * Created by Nowocode.
@@ -41,7 +41,7 @@ public class SplashScreen extends AppCompatActivity{
     }
 
     private void skipToMainScreen(){
-        startActivity(new Intent(this,MainActivity.class));
+        startActivity(new Intent(this,MainViewImpl.class));
     }
     /**
      * Quick & dirty.. No need to create a Presenter for the SplashScreen

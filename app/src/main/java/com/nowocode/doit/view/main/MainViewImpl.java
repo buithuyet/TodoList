@@ -1,6 +1,7 @@
 package com.nowocode.doit.view.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -16,6 +17,7 @@ import com.nowocode.doit.R;
 import com.nowocode.doit.model.repository.database.task.Task;
 import com.nowocode.doit.presenter.MainPresenter;
 import com.nowocode.doit.presenter.PresenterBuilder;
+import com.nowocode.doit.view.create.CreateTaskViewImpl;
 import com.nowocode.doit.view.main.fragment.DailyFragment;
 import com.nowocode.doit.view.main.fragment.WeeklyFragment;
 import com.nowocode.doit.view.main.fragment.YearlyFragment;
@@ -36,7 +38,7 @@ import io.reactivex.functions.Consumer;
  * /______|     |___\
  */
 
-public class MainActivity extends AppCompatActivity implements MainView {
+public class MainViewImpl extends AppCompatActivity implements MainView {
     @BindView(R.id.tabs)
     TabLayout tabLayout;
     @BindView(R.id.container)
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @OnClick(R.id.createTaskFab)
     void onNewTask() {
-        Toast.makeText(this, "Clicked Toast", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, CreateTaskViewImpl.class));
     }
 
     @Override
@@ -94,6 +96,11 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public Context getContext() {
         return getContext();
+    }
+
+    @Override
+    public void showToast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -9,4 +9,13 @@ import com.nowocode.doit.view.create.CreateTaskView;
  */
 
 public interface CreateTaskPresenter extends BasePresenter<CreateTaskView> {
+    void createTask();
+
+    void setTitle(String title);
+
+    void setDescription(String description);
+
+    void setCategory(String category);
+
+    void setType(String type);
 }

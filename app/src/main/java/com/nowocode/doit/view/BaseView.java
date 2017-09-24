@@ -9,4 +9,5 @@ import android.content.Context;
 
 public interface BaseView<BasePresenter> {
     Context getContext();
+    void showToast(String text);
 }
