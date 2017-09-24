@@ -1,19 +1,13 @@
 package com.nowocode.doit.view.create.fragment;
 
 import android.annotation.SuppressLint;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.nowocode.doit.R;
 import com.nowocode.doit.view.create.CreateTaskView;
 import com.nowocode.doit.view.create.TaskReceiver;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -53,14 +47,6 @@ public class ChooseTypeFragment extends AbstractCreateTaskFragment {
 
     public ChooseTypeFragment(TaskReceiver receiver) {
         super(receiver, TYPE);
-        taskView = (CreateTaskView) receiver;
     }
 
-    private void next() {
-        taskView.nextPage();
-    }
-
-    private void previous() {
-        taskView.prevPage();
-    }
 }

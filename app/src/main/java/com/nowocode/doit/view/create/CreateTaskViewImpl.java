@@ -12,6 +12,7 @@ import com.nowocode.doit.R;
 import com.nowocode.doit.presenter.PresenterBuilder;
 import com.nowocode.doit.presenter.create.CreateTaskPresenter;
 import com.nowocode.doit.view.create.fragment.ChooseCategoryFragment;
+import com.nowocode.doit.view.create.fragment.ChooseContentFragment;
 import com.nowocode.doit.view.create.fragment.ChooseTypeFragment;
 
 import butterknife.BindView;
@@ -41,21 +42,28 @@ public class CreateTaskViewImpl extends AppCompatActivity implements CreateTaskV
         presenter = (CreateTaskPresenter) presenterBuilder.build();
         chooseTypeFragment = new ChooseTypeFragment(this);
         chooseCategoryFragment = new ChooseCategoryFragment(this);
-        currentFragment = chooseTypeFragment;
+        setContentFragment = new ChooseContentFragment(this);
+        setChooseTypeFragment();
         drawUi();
     }
 
     private void drawUi() {
         getSupportFragmentManager().beginTransaction().replace(R.id.container, currentFragment
         ).commit();
+
+        progress.setText(currentPage + "/3");
     }
 
     @Override
     public void onBackPressed() {
         if (previousFragment != null) {
             currentFragment = previousFragment;
-            if (currentFragment == chooseTypeFragment)
-                previousFragment = null;
+            if (currentFragment == chooseCategoryFragment)
+                setChooseCategoryFragment();
+            else if (currentFragment == setContentFragment)
+                setChooseContentFragment();
+            else if (currentFragment == chooseTypeFragment)
+                setChooseTypeFragment();
             drawUi();
         } else
             super.onBackPressed();
@@ -75,15 +83,31 @@ public class CreateTaskViewImpl extends AppCompatActivity implements CreateTaskV
     @Override
     public void nextPage() {
         if (currentFragment == chooseTypeFragment) {
-            currentFragment = chooseCategoryFragment;
-            previousFragment = chooseTypeFragment;
-            currentPage = 2;
+            setChooseCategoryFragment();
         } else if (currentFragment == chooseCategoryFragment) {
             currentFragment = setContentFragment;
             previousFragment = chooseCategoryFragment;
             currentPage = 3;
         }
         drawUi();
+    }
+
+    void setChooseTypeFragment() {
+        currentFragment = chooseTypeFragment;
+        previousFragment = null;
+        currentPage = 1;
+    }
+
+    void setChooseCategoryFragment() {
+        currentFragment = chooseCategoryFragment;
+        previousFragment = chooseTypeFragment;
+        currentPage = 2;
+    }
+
+    void setChooseContentFragment() {
+        currentFragment = setContentFragment;
+        previousFragment = chooseCategoryFragment;
+        currentPage = 3;
     }
 
     @Override
@@ -98,6 +122,11 @@ public class CreateTaskViewImpl extends AppCompatActivity implements CreateTaskV
         }
 
         drawUi();
+    }
+
+    @Override
+    public void createTask() {
+        presenter.createTask();
     }
 
     @Override

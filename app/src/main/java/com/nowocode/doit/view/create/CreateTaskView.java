@@ -11,4 +11,5 @@ import com.nowocode.doit.view.BaseView;
 public interface CreateTaskView extends BaseView<CreateTaskPresenter> {
     void nextPage();
     void prevPage();
+    void createTask();
 }

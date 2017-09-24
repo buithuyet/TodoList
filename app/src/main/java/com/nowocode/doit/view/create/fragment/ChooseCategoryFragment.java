@@ -13,6 +13,7 @@ import com.nowocode.doit.view.create.TaskReceiver;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * @author Nowocode
@@ -30,6 +31,30 @@ public class ChooseCategoryFragment extends AbstractCreateTaskFragment {
     @BindView(R.id.loveBlock)
     LinearLayout loveBlock;
 
+    @OnClick(R.id.healthBlock)
+    void onSelectHealth() {
+        setContent(CATEGORY, "health");
+        next();
+    }
+
+    @OnClick(R.id.financeBlock)
+    void onSelectFinance() {
+        setContent(CATEGORY, "finance");
+        next();
+    }
+
+    @OnClick(R.id.studyBlock)
+    void onSelectEducation() {
+        setContent(CATEGORY, "education");
+        next();
+    }
+
+    @OnClick(R.id.loveBlock)
+    void onSelectLove() {
+        setContent(CATEGORY, "love");
+        next();
+    }
+
     public ChooseCategoryFragment(TaskReceiver receiver) {
         super(receiver, CATEGORY);
     }
@@ -37,7 +62,7 @@ public class ChooseCategoryFragment extends AbstractCreateTaskFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v  = super.onCreateView(inflater, container, savedInstanceState);
+        View v = super.onCreateView(inflater, container, savedInstanceState);
         v.setOnClickListener(new CategoryClicklistener());
         return v;
     }

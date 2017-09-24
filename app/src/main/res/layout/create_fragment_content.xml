@@ -1,6 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+    
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="12dp">
+            <!-- Category / type header -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:id="@+id/catTypeHeader"
+                android:text="Finanzen - Monatlich"/>
+
+            <!-- Datum -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/dateHeader"
+                android:text="24.09.2017"/>
+
+            <!-- Task Titel -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/catTypeHeader"
+                app:layout_constraintLeft_toLeftOf="@id/catTypeHeader"
+                android:id="@+id/taskTitle"
+                android:text="Titel"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="20sp"
+                android:layout_marginTop="8dp"/>
+            <!-- Edit Text Title -->
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/catTypeHeader"
+                app:layout_constraintLeft_toLeftOf="@id/catTypeHeader"
+                android:id="@+id/taskTitleEditText"
+                android:text="Titel"
+                android:fontFamily="@font/roboto_medium"
+                android:visibility="gone"
+                android:textSize="20sp" />
+
+            <!-- edit title icon-->
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pen_icon"
+                app:layout_constraintTop_toBottomOf="@id/catTypeHeader"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="16dp"
+                android:alpha="0.5"
+                android:id="@+id/editTitle"/>
+
+
+            <!-- Notiz -->
+            <TextView
+                android:layout_marginTop="16dp"
+                android:id="@+id/note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Es wurde noch keine Notiz hinzugefügt."
+                app:layout_constraintTop_toBottomOf="@id/taskTitle"/>
+
+            <!-- edit Notiz icon-->
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pen_icon"
+                app:layout_constraintTop_toTopOf="@id/note"
+                app:layout_constraintRight_toRightOf="parent"
+                android:alpha="0.5"
+                android:id="@+id/editNotiz"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="64dp"
+                android:background="#000"
+                android:alpha="0.19"
+                android:id="@+id/divider"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deadline festlegen"
+                android:textColor="@color/red"
+                android:drawableLeft="@drawable/calendar_icon"
+                android:drawableStart="@drawable/calendar_icon"
+                android:drawableTint="@color/red"
+                android:alpha="0.89"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider"
+                android:fontFamily="@font/roboto"/>
+        </android.support.constraint.ConstraintLayout>
+
+
+
+
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>
