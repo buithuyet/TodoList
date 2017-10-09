@@ -1,6 +1,8 @@
 package com.nowocode.doit.view.create.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
@@ -88,9 +90,21 @@ public class ChooseContentFragment extends AbstractCreateTaskFragment {
         taskTitle.setVisibility(View.VISIBLE);
         note.setVisibility(View.VISIBLE);
         noteInput.setVisibility(View.GONE);
+        setContent(TaskReceiver.TITLE, taskTitle.getText().toString());
+        setContent(TaskReceiver.DESCRIPTION, note.getText().toString());
         changeConfirmButton(false);
     }
 
     void saveTask() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Task erstellen");
+        builder.setMessage("Möchtest du den Task " + taskTitle.getText().toString() + " erstellen?")
+                .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        createTask();
+                    }
+                }).show();
     }
 }

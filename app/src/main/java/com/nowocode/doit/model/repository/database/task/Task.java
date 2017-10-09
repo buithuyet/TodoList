@@ -20,6 +20,13 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 @Entity(foreignKeys = @ForeignKey(entity = User.class, parentColumns = "userId", childColumns = "userId", onDelete = CASCADE))
 public class Task {
+    public static class CATEGORY
+    {
+        public static final String EDU = "education";
+        public static final String HEALTH = "health";
+        public static final String FINANCE = "finance";
+        public static final String LOVE = "love";
+    }
     @Ignore
     public static final int DAILY = 0;
     @Ignore
@@ -113,5 +120,10 @@ public class Task {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "Task : " + title + " , type : " + type + " created on : " + created.toGMTString();
     }
 }

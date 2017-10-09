@@ -9,11 +9,14 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.nowocode.doit.R;
+import com.nowocode.doit.model.repository.database.task.Task;
 import com.nowocode.doit.view.create.TaskReceiver;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.nowocode.doit.model.repository.database.task.Task.CATEGORY.*;
 
 /**
  * @author Nowocode
@@ -33,25 +36,25 @@ public class ChooseCategoryFragment extends AbstractCreateTaskFragment {
 
     @OnClick(R.id.healthBlock)
     void onSelectHealth() {
-        setContent(CATEGORY, "health");
+        setContent(CATEGORY, HEALTH);
         next();
     }
 
     @OnClick(R.id.financeBlock)
     void onSelectFinance() {
-        setContent(CATEGORY, "finance");
+        setContent(CATEGORY, FINANCE);
         next();
     }
 
     @OnClick(R.id.studyBlock)
     void onSelectEducation() {
-        setContent(CATEGORY, "education");
+        setContent(CATEGORY, EDU);
         next();
     }
 
     @OnClick(R.id.loveBlock)
     void onSelectLove() {
-        setContent(CATEGORY, "love");
+        setContent(CATEGORY, LOVE);
         next();
     }
 
@@ -74,16 +77,16 @@ public class ChooseCategoryFragment extends AbstractCreateTaskFragment {
             System.out.println("CategoryClicklistener.onClick " + view.getId());
             switch (view.getId()) {
                 case R.id.healthBlock:
-                    receiver.setData(TaskReceiver.CATEGORY, "health");
+                    receiver.setData(TaskReceiver.CATEGORY, Task.CATEGORY.HEALTH);
                     break;
                 case R.id.financeBlock:
-                    receiver.setData(TaskReceiver.CATEGORY, "finance");
+                    receiver.setData(TaskReceiver.CATEGORY, Task.CATEGORY.FINANCE);
                     break;
                 case R.id.studyBlock:
-                    receiver.setData(TaskReceiver.CATEGORY, "study");
+                    receiver.setData(TaskReceiver.CATEGORY, Task.CATEGORY.EDU);
                     break;
                 case R.id.loveBlock:
-                    receiver.setData(TaskReceiver.CATEGORY, "love");
+                    receiver.setData(TaskReceiver.CATEGORY, Task.CATEGORY.LOVE);
                     break;
             }
 

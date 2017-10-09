@@ -47,7 +47,7 @@ public class MainViewImpl extends AppCompatActivity implements MainView {
     Toolbar toolbar;
     @BindView(R.id.createTaskFab)
     FloatingActionButton fab;
-    private TaskFragment dailyFragment;
+    private Fragment dailyFragment;
     private TaskFragment weeklyFragment;
     private TaskFragment yearlyFragment;
     SectionsPagerAdapter mSectionsPagerAdapter;
@@ -61,9 +61,9 @@ public class MainViewImpl extends AppCompatActivity implements MainView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        drawUi();
         PresenterBuilder presenterBuilder = PresenterBuilder.createWith(this);
         presenter = (MainPresenter) presenterBuilder.build();
+        drawUi();
     }
 
     @Override
@@ -72,12 +72,12 @@ public class MainViewImpl extends AppCompatActivity implements MainView {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
+        dailyFragment = new DailyFragment(this);
         // todo set TaskFragments
 
-        mSectionsPagerAdapter.addFragment(new DailyFragment(), "Day");
-        mSectionsPagerAdapter.addFragment(new WeeklyFragment(), "Week");
-        mSectionsPagerAdapter.addFragment(new YearlyFragment(), "Year");
+        mSectionsPagerAdapter.addFragment(dailyFragment, "Day");
+        mSectionsPagerAdapter.addFragment(new WeeklyFragment(this), "Week");
+        mSectionsPagerAdapter.addFragment(new YearlyFragment(this), "Year");
         // Set up the ViewPager with the sections adapter.
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
@@ -95,7 +95,7 @@ public class MainViewImpl extends AppCompatActivity implements MainView {
 
     @Override
     public Context getContext() {
-        return getContext();
+        return this;
     }
 
     @Override
@@ -105,11 +105,11 @@ public class MainViewImpl extends AppCompatActivity implements MainView {
 
     @Override
     public void getDailyTasks() {
-        presenter.getDailyTasks().subscribeOn(AndroidSchedulers.mainThread())
+        presenter.getDailyTasks().observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Task>() {
                     @Override
                     public void accept(Task task) throws Exception {
-                        dailyFragment.addTaskToDisplay(task);
+                        ((TaskFragment) dailyFragment).addTaskToDisplay(task);
                     }
                 });
     }

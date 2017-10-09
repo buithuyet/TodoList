@@ -46,6 +46,7 @@ public class TodoApp extends Application {
                         if(aBoolean) {
                             db.userDao().insert(createDefaultUser());
                             preferenceProvider.setCurrentUser("default");
+                            TaskFactory.initForUser(currentUser);
                         }
                         else
                         {

@@ -2,18 +2,17 @@ package com.nowocode.doit.presenter;
 
 import android.content.Context;
 
-import com.nowocode.doit.model.Action;
+import com.nowocode.doit.model.ContextProvider;
 import com.nowocode.doit.model.factory.TaskFactory;
 import com.nowocode.doit.model.factory.UserFactory;
 import com.nowocode.doit.model.provider.TaskProvider;
 import com.nowocode.doit.model.provider.UserProvider;
+import com.nowocode.doit.model.provider.impl.TaskProviderImpl;
 import com.nowocode.doit.model.repository.database.task.Task;
 import com.nowocode.doit.model.repository.database.user.User;
-import com.nowocode.doit.model.util.Timestamp;
 import com.nowocode.doit.view.main.MainView;
 
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -30,6 +29,7 @@ class MainPresenterImpl implements MainPresenter {
 
     MainPresenterImpl(MainView view) {
         this.view = view;
+        taskProvider = new TaskProviderImpl(new ContextProvider(getViewContext()));
     }
 
     @Override
@@ -46,7 +46,7 @@ class MainPresenterImpl implements MainPresenter {
 
     @Override
     public Observable<Task> getDailyTasks() {
-        return taskProvider.getAllTasksByType(Task.DAILY);
+        return taskProvider.getAllTasksByType(Task.DAILY).subscribeOn(Schedulers.io());
     }
 
     @Override
@@ -99,6 +99,6 @@ class MainPresenterImpl implements MainPresenter {
 
     @Override
     public Context getViewContext() {
-        return getViewContext();
+        return view.getContext();
     }
 }

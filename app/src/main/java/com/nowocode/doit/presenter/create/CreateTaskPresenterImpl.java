@@ -11,6 +11,12 @@ import com.nowocode.doit.model.provider.impl.TaskProviderImpl;
 import com.nowocode.doit.model.repository.database.task.Task;
 import com.nowocode.doit.view.create.CreateTaskView;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 /**
  * @author Nowocode
  *         23.09.2017.
@@ -37,7 +43,31 @@ public class CreateTaskPresenterImpl implements CreateTaskPresenter {
     public void createTask() {
         if (taskTitle != null && taskDescription != null && taskCategory != null) {
             Task t = TaskFactory.create(taskTitle, taskDescription, taskCategory, taskType);
-            taskProvider.insert(t);
+            Log.d(TAG, "createTask: " + t.toString());
+            taskProvider.insert(t).observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io()).subscribe(new Observer<Boolean>() {
+                @Override
+                public void onSubscribe(Disposable d) {
+
+                }
+
+                @Override
+                public void onNext(Boolean aBoolean) {
+                    Log.d(TAG, "onNext: " + aBoolean);
+                    if (aBoolean)
+                        view.onTaskCreated();
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    Log.e(TAG, "onError: ", e);
+                }
+
+                @Override
+                public void onComplete() {
+
+                }
+            });
 
         } else
             view.showToast("Bitte fülle alle Daten aus!");
@@ -45,12 +75,12 @@ public class CreateTaskPresenterImpl implements CreateTaskPresenter {
 
     @Override
     public void setTitle(String title) {
-
+        this.taskTitle = title;
     }
 
     @Override
     public void setDescription(String description) {
-
+        this.taskDescription = description;
     }
 
     @Override

@@ -60,4 +60,8 @@ public abstract class AbstractCreateTaskFragment extends Fragment {
     void showToast(String text) {
         Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
     }
+
+    void createTask() {
+        taskView.createTask();
+    }
 }

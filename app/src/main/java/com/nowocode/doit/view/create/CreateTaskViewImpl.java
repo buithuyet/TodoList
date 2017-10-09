@@ -26,10 +26,8 @@ import butterknife.ButterKnife;
 public class CreateTaskViewImpl extends AppCompatActivity implements CreateTaskView, TaskReceiver {
 
     private CreateTaskPresenter presenter;
-    @BindView(R.id.container)
-    FrameLayout container;
-    @BindView(R.id.progress)
-    TextView progress;
+    @BindView(R.id.container) FrameLayout container;
+    @BindView(R.id.progress) TextView progress;
     private Fragment currentFragment, previousFragment, chooseTypeFragment, chooseCategoryFragment, setContentFragment;
     private int currentPage = 1;
 
@@ -72,7 +70,7 @@ public class CreateTaskViewImpl extends AppCompatActivity implements CreateTaskV
 
     @Override
     public Context getContext() {
-        return null;
+        return this;
     }
 
     @Override
@@ -127,6 +125,13 @@ public class CreateTaskViewImpl extends AppCompatActivity implements CreateTaskV
     @Override
     public void createTask() {
         presenter.createTask();
+    }
+
+    @Override
+    public void onTaskCreated() {
+        currentFragment = null;
+        previousFragment = null;
+        onBackPressed();
     }
 
     @Override
